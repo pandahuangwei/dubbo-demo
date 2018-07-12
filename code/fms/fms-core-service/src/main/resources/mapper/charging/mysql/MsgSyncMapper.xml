@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MsgSyncMapper">
+
+    <resultMap type="com.simple.core.charging.entity.MsgSize" id="MsgSizeMap">
+        <result column="msg_id" property="msgId"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="carrier_iata" property="carrierIata"/>
+        <result column="flight_dt" property="flightDt"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="msg_type" property="msgType"/>
+        <result column="dept_airport" property="deptAirport"/>
+        <result column="arrive_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="msg_size" property="msgSize"/>
+    </resultMap>
+
+    <select id="selectMsgSize" parameterType="java.util.Date" resultMap="MsgSizeMap">
+      SELECT  msg_id, create_tm, carrier_iata, ac_reg, flight_dt, flight_no, dept_airport, arrive_airport, std, msg_type, msg_size
+         FROM fms_msg_size
+        WHERE 1 = 1
+        <if test="_parameter != null">
+            AND create_tm =  #{value}
+        </if>
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <bean id="syncDataApplication" class="com.simple.core.charging.job.SyncDataApplication"></bean>
+
+    <!-- 1 同步权限数据定时器 -->
+    <bean id="syncAuthJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="syncDataApplication" />
+        <property name="targetMethod">
+            <value>syncAuth</value>
+        </property>
+        <property name="concurrent" value="false"></property>
+    </bean>
+
+    <bean id="syncAuthCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="syncAuthJobDetail" />
+        <property name="cronExpression">
+            <value>${task.syncAuth.timer}</value>
+        </property>
+    </bean>
+
+    <!-- 2 同步报文大小定时器 -->
+    <bean id="syncMsgSizeJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="syncDataApplication" />
+        <property name="targetMethod">
+            <value>syncMsgSize</value>
+        </property>
+        <property name="concurrent" value="false"></property>
+    </bean>
+
+    <bean id="syncMsgSizeCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="syncMsgSizeJobDetail" />
+        <property name="cronExpression">
+            <value>${task.syncMsgSize.timer}</value>
+        </property>
+    </bean>
+
+    <!-- 定时任务列表 -->
+    <bean id="scheduledRouteAutoCalFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="syncAuthCronTrigger" />
+                <ref bean="syncMsgSizeCronTrigger" />
+            </list>
+        </property>
+        <property name="schedulerName" value="SYNC_AUTH_SCHEDULER"></property>
+    </bean>
+
+ </beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 授权信息服务接口 -->
+    <dubbo:reference interface="com.simple.core.common.facade.ChargingFacade" id="chargingRestService" check="false"/>
+
+    <dubbo:reference interface="com.simple.core.common.facade.ParseMsgFacade" id="fpnFacade" group="REQFPN" check="false"/>
+    <dubbo:reference interface="com.simple.core.common.facade.ParseMsgFacade" id="freetextFacade" group="CMD" check="false"/>
+    <dubbo:reference interface="com.simple.core.common.facade.ParseMsgFacade" id="perFacade" group="REQPER" check="false"/>
+    <dubbo:reference interface="com.simple.core.common.facade.ParseMsgFacade" id="pwiFacade" group="REQPWI" check="false"/>
+
+   <bean id="referenceBeanFactory" class="com.simple.core.route.util.ReferenceBeanFactory" factory-method="getInstance">
+     <property name="interfaceMap">
+         <map>
+             <entry key="REQFPN" value-ref="fpnFacade"></entry>
+             <entry key="CMD" value-ref="freetextFacade"></entry>
+             <entry key="REQPER" value-ref="perFacade"></entry>
+             <entry key="REQPWI" value-ref="pwiFacade"></entry>
+         </map>
+     </property>
+   </bean>
+
+</beans>

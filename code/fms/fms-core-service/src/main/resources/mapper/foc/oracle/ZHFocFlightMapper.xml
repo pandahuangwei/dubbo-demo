@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ZHFocFlightMapper">
+
+    <resultMap id="resultFocFlight" type="com.simple.core.foc.entity.FocFlight">
+        <result column="seq_t2001" property="focFlightId"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="departure_airport" property="departureAirport"/>
+        <result column="arrival_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="etd" property="etd"/>
+        <result column="atd" property="atd"/>
+        <result column="sta" property="sta"/>
+        <result column="eta" property="eta"/>
+        <result column="ata" property="ata"/>
+        <result column="ac_type" property="acType"/>
+        <result column="d_or_i" property="dOrI"/>
+        <result column="dispatch_pass_time" property="dispatchPassTime"/>
+        <result column="is_crew_time" property="crewArrivalTime"/>
+        <result column="flg_vr" property="flgVR"/>
+        <result column="flg_vr1" property="flgVR1"/>
+        <result column="flg_cs" property="flgCS"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="modify_time" property="modifyTm"/>
+        <result column="flag_rls" property="flagRLS"/>
+    </resultMap>
+
+    <resultMap id="resultFocCfp" type="com.simple.core.foc.entity.FocCfp">
+        <result column="flight_id" property="flightId"/>
+        <result column="cfp_info" property="cfpInfo"/>
+        <result column="modify_time" property="modifyTm"/>
+    </resultMap>
+
+    <select id="selectFlightByStartEndTime" resultType="com.simple.core.foc.entity.FocFlight" resultMap="resultFocFlight" parameterType="java.util.Map">
+      SELECT
+        t.seq_t2001, t.flight_no, t.flight_date, t.departure_airport,t.arrival_airport,
+        t.std, t.etd,t.atd, t.sta, t.eta,
+        t.ata, t.ac_reg ,t.ac_type, t.d_or_i, t.dispatch_pass_time,
+        t.is_crew_time, t.flg_vr, t.flg_cs, t.modify_time,t.flag_rls,flg_vr1
+      FROM t2001 t
+      WHERE t.std BETWEEN #{startTime} AND #{endTime}
+      ORDER BY t.std ASC
+    </select>
+
+    <select id="selectFlightByUpdateTime" resultType="com.simple.core.foc.entity.FocFlight" resultMap="resultFocFlight" parameterType="java.util.Date">
+        SELECT
+        t.seq_t2001, t.flight_no, t.flight_date, t.departure_airport,t.arrival_airport,
+        t.std, t.etd,t.atd, t.sta, t.eta,
+        t.ata, t.ac_reg ,t.ac_type, t.d_or_i, t.dispatch_pass_time,
+        t.is_crew_time, t.flg_vr, t.flg_cs, t.modify_time,t.flag_rls,flg_vr1
+      FROM t2001 t
+      WHERE   t.modify_time >#{lastUpdateTime}
+      ORDER BY t.modify_time ASC
+    </select>
+
+    <select id="selectCfpByUpdateTime" parameterType="java.util.Date"  resultMap="resultFocCfp" resultType="com.simple.core.foc.entity.FocCfp">
+        SELECT t.flight_id,t.cfp_info,t.modify_time FROM  t2001_fchk  t
+        WHERE   t.modify_time >#{lastUpdateTime}
+        ORDER BY t.modify_time ASC
+    </select>
+    <select id="selectCfpByStartEndTime"  parameterType="java.util.Map"  resultMap="resultFocCfp" resultType="com.simple.core.foc.entity.FocCfp">
+         SELECT t.flight_id,t.cfp_info,t.modify_time
+         FROM  t2001 f,t2001_fchk  t
+         WHERE f.seq_t2001 = t.flight_id AND f.std BETWEEN #{startTime} AND #{endTime}
+         ORDER BY f.std ASC
+    </select>
+
+    <select id="getFocFlightIds" resultType="Integer">
+      SELECT t.seq_t2001 FROM t2001 t WHERE t.seq_t2001 IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            ${item}
+        </foreach>
+    </select>
+
+</mapper>

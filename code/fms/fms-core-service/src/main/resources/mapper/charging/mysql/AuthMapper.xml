@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AuthMapper">
+
+    <resultMap type="com.simple.core.common.entity.Auth" id="AuthMap">
+        <result column="carrier_iata" property="carrierIata"/>
+        <result column="carrier_icao" property="carrierIcao"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="msg_type" property="msgType"/>
+        <result column="is_auth" property="auth"/>
+        <result column="effective_dt" property="effectiveDt"/>
+        <result column="expire_dt" property="expireDt"/>
+    </resultMap>
+
+    <select id="findAuthAll" resultMap="AuthMap">
+       SELECT
+              b.carrier_iata,
+              b.carrier_icao,
+              b.ac_reg,
+              a.msg_type,
+              a.is_auth,
+              a.effective_dt,
+              a.expire_dt
+       FROM cfg_acr_auth a,cfg_cpy_acr b
+       WHERE a.ac_reg = b.ac_reg
+         AND a.is_del = 0
+         AND b.is_del = 0
+         AND a.is_auth = 1
+   </select>
+
+    <delete id="deleteAcrAuth" parameterType="String">
+        DELETE FROM cfg_acr_auth WHERE 1 = 1
+        <if test="_parameter != null and _parameter != ''">
+            AND auth_id =  #{value}
+        </if>
+    </delete>
+
+    <delete id="deleteCpyAcr" parameterType="String">
+        DELETE FROM cfg_cpy_acr WHERE 1 = 1
+        <if test="_parameter != null and _parameter != ''">
+            AND acr_id =  #{value}
+        </if>
+    </delete>
+
+    <insert id="insertAcrAuth" parameterType="java.util.List">
+        INSERT INTO cfg_acr_auth
+            (auth_id, create_by, create_tm,  modify_by, modify_tm, is_del,ac_reg, msg_type, is_auth,  effective_dt, expire_dt)
+            VALUES
+         <foreach collection="list"  item="item" index="index" separator=",">
+            (#{item.id}, #{item.createBy},#{item.createTm}, #{item.modifyBy},#{item.modifyTm}, #{item.del},
+             #{item.acReg},#{item.msgType}, #{item.auth}, #{item.effectiveDt},#{item.expireDt}
+            )
+            </foreach>
+    </insert>
+
+    <insert id="insertCpyAcr" parameterType="java.util.List">
+       INSERT INTO cfg_cpy_acr
+            (acr_id, create_by, create_tm, modify_by, modify_tm, is_del,carrier_iata, carrier_icao, ac_reg )
+            VALUES
+        <foreach collection="list"  item="item" index="index" separator=",">
+            (#{item.id}, #{item.createBy},#{item.createTm}, #{item.modifyBy},#{item.modifyTm}, #{item.del},
+             #{item.carrierIata}, #{item.carrierIcao}, #{item.acReg} )
+        </foreach>
+    </insert>
+
+</mapper>

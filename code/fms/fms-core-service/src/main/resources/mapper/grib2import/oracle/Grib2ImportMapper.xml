@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Grib2ImportMapper">
+
+    <resultMap id="resultGrib2WdInfo" type="com.simple.core.pwi.entity.Grib2WdInfo">
+        <result column="wd_id" property="wdId"/>
+        <result column="lon" property="lon"/>
+        <result column="lat" property="lat"/>
+        <result column="atmos_pressure" property="atmosPressure"/>
+        <result column="wind_vel" property="windVel"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="wind_type" property="windType"/>
+    </resultMap>
+    <insert id="storeGrib2Data" parameterType="java.util.List">
+         INSERT INTO  fms_grib2_wd_info
+                (wd_id,
+                start_time,
+                end_time,
+                wind_type,
+                atmos_pressure,
+                lon,
+                lat,
+                wind_vel
+                )
+        <foreach collection="list" item="item" index="index" separator="union all" >
+                SELECT
+                #{item.wdId},
+                #{item.startTime},
+                #{item.endTime},
+                #{item.windType},
+                #{item.atmosPressure},
+                #{item.lon},
+                #{item.lat},
+                #{item.windVel}
+                FROM dual
+        </foreach>
+
+
+    </insert>
+
+    <select id="countByTimeAlt" parameterType="java.util.Map" resultType="int">
+        select count(1) from fms_grib2_wd_info u
+                where TO_DATE(start_time, 'yyyy-MM-dd HH24:mi:ss') = #{startTime,jdbcType=DATE}
+                and TO_DATE(end_time, 'yyyy-MM-dd HH24:mi:ss') =  #{endTime,jdbcType=DATE}
+                and u.ATMOS_PRESSURE = #{alt,jdbcType=NUMERIC}
+    </select>
+
+    <delete id="deleteByTimeAlt" parameterType="java.util.Map" >
+         delete from fms_grib2_wd_info
+                where TO_DATE(start_time, 'yyyy-MM-dd HH24:mi:ss') = #{startTime,jdbcType=DATE}
+                and TO_DATE(end_time, 'yyyy-MM-dd HH24:mi:ss') = #{endTime,jdbcType=DATE}
+                and ATMOS_PRESSURE = #{alt,jdbcType=NUMERIC}
+    </delete>
+
+</mapper>

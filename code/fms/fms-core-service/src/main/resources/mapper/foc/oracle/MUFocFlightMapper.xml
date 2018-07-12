@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MUFocFlightMapper">
+
+    <resultMap id="resultFocFlight" type="com.simple.core.foc.entity.FocFlight">
+        <result column="seq_t2001" property="focFlightId"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="departure_airport" property="departureAirport"/>
+        <result column="arrival_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="etd" property="etd"/>
+        <result column="atd" property="atd"/>
+        <result column="sta" property="sta"/>
+        <result column="eta" property="eta"/>
+        <result column="ata" property="ata"/>
+        <result column="ac_type" property="acType"/>
+        <result column="d_or_i" property="dOrI"/>
+        <result column="dispatch_pass_time" property="dispatchPassTime"/>
+        <result column="crew_arrival_time" property="crewArrivalTime"/>
+        <result column="flg_vr" property="flgVR"/>
+        <result column="flg_cs" property="flgCS"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="modify_time" property="modifyTm"/>
+    </resultMap>
+
+    <resultMap id="resultFocCfp" type="com.simple.core.foc.entity.FocCfp">
+        <result column="flight_id" property="flightId"/>
+        <result column="cfp_info" property="cfpInfo"/>
+        <result column="modify_time" property="modifyTm"/>
+    </resultMap>
+
+    <select id="selectFlightByTime" resultType="com.simple.core.foc.entity.FocFlight" resultMap="resultFocFlight" parameterType="java.util.Map">
+       SELECT
+            t.seq_t2001, t.flight_no, t.flight_date, t.departure_airport, t.arrival_airport,
+            t.std, t.etd, t.atd, t.sta, t.eta,
+            t.ata, t.ac_reg, t.ac_type ,t.d_or_i, t.dispatch_pass_time ,
+            t.crew_arrival_time, t.flg_vr,t.flg_cs, t.modify_time
+        FROM t2001 t
+       WHERE t.ata IS NULL
+         AND t.std BETWEEN #{startTime} AND #{endTime}
+         AND t.atd IS NOT NULL
+    </select>
+
+
+    <select id="selectCfpByTime" parameterType="java.util.Date"  resultMap="resultFocCfp" resultType="com.simple.core.foc.entity.FocCfp">
+        SELECT t.flight_id,t.cfp_info,t.modify_time FROM  t2001_fchk  t  WHERE   t.modify_time >#{lastUpdateTime}
+    </select>
+</mapper>

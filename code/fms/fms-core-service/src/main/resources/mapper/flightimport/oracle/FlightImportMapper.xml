@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FlightImportMapper">
+
+    <resultMap id="resultFlightBase" type="com.simple.core.common.entity.FlightBase">
+        <result column="flight_id" property="flightId" />
+        <result column="foc_flight_id" property="focFlightId"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="departure_airport" property="departureAirport"/>
+        <result column="arrival_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="etd" property="etd"/>
+        <result column="atd" property="atd"/>
+        <result column="sta" property="sta"/>
+        <result column="eta" property="eta"/>
+        <result column="ata" property="ata"/>
+        <result column="create_tm" property="createTm" />
+        <result column="modify_tm" property="modifyTm" />
+        <result column="ac_reg" property="acReg"/>
+        <result column="ac_type" property="acType"/>
+        <result column="d_or_i" property="dOrI" />
+        <result column="dispatch_pass_time" property="dispatchPassTime"/>
+        <result column="is_dispatch" property="dispatch"/>
+        <result column="crew_arrival_time" property="crewArrivalTime"/>
+        <result column="is_crew_arrival" property="crewArrival"/>
+        <result column="flg_vr" property="flgVR"/>
+        <result column="flg_vr1" property="flgVR1"/>
+        <result column="flg_cs" property="flgCS"/>
+        <result column="foc_modify_tm" property="focModifyTm"/>
+        <result column="route_change" property="routeChange"/>
+        <result column="route_change_tm" property="routeChangeTm"/>
+        <result column="main_route" property="mainRoute"/>
+        <result column="main_route_point" property="mainRoutePoint"/>
+        <result column="alter_route1" property="alterRoute1"/>
+        <result column="alter_route2" property="alterRoute2"/>
+        <result column="alter_route3" property="alterRoute3"/>
+        <result column="alter_route1_point" property="alterRoute1Point"/>
+        <result column="alter_route2_point" property="alterRoute2Point"/>
+        <result column="alter_route3_point" property="alterRoute3Point"/>
+        <result column="main_company_route" property="mainCompanyRoute"/>
+        <result column="alter_company_route1" property="alterCompanyRoute1"/>
+        <result column="alter_company_route2" property="alterCompanyRoute2"/>
+        <result column="alter_company_route3" property="alterCompanyRoute3"/>
+        <result column="alter_airport1" property="alterAirport1"/>
+        <result column="alter_airport2" property="alterAirport2"/>
+        <result column="alter_airport3" property="alterAirport3"/>
+        <result column="is_main_special" property="mainSpecial" />
+        <result column="is_alter1_special" property="alter1Special"/>
+        <result column="is_alter2_special" property="alter2Special"/>
+        <result column="is_alter3_special" property="alter3Special"/>
+        <result column="cost_index" property="costIndex"/>
+        <result column="tra_fuel" property="traFuel" />
+        <result column="takeoff_weight" property="takeoffWeight" />
+        <result column="land_weight" property="landWeight" />
+        <result column="av_payload" property="avPayload" />
+        <result column="opnl_weight" property="opnlWeight"/>
+        <result column="alt_fuel" property="altFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="res_fuel" property="resFuel"/>
+        <result column="xtr_fuel" property="xtrFuel"/>
+        <result column="apu_fuel" property="apuFuel"/>
+        <result column="txo_fuel" property="txoFuel"/>
+        <result column="txi_fuel" property="txiFuel"/>
+        <result column="fob_fuel" property="fobFuel"/>
+        <result column="cruise_altitude" property="cruiseAltitude" />
+        <result column="route_avg_temp" property="routeAvgTemp" />
+        <result column="route_avg_wind" property="routeAvgWind" />
+        <result column="plan_no" property="planNo"/>
+        <result column="alter_route1_fl" property="alterRoute1Fl"/>
+        <result column="alter_route2_fl" property="alterRoute2Fl"/>
+        <result column="alter_route3_fl" property="alterRoute3Fl"/>
+        <result column="alter_route1_wc" property="alterRoute1Wc"/>
+        <result column="alter_route2_wc" property="alterRoute2Wc"/>
+        <result column="alter_route3_wc" property="alterRoute3Wc"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+    </resultMap>
+
+    <resultMap id="resultCfpExt" type="com.simple.core.flightimport.entity.CfpExt">
+        <result column="cfp_id" property="cfpId"/>
+        <result column="foc_flight_id" property="focFlightId"/>
+        <result column="cfp_info" property="cfpInfo"/>
+        <result column="md5" property="md5"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="foc_modify_tm" property="focModifyTm"/>
+        <result column="plan_no" property="planNo"/>
+        <result column="main_company_route" property="mainCompanyRoute"/>
+        <result column="main_route" property="mainRoute"/>
+        <result column="main_route_point" property="mainRoutePoint"/>
+        <result column="alter_airport1" property="alterAirport1"/>
+        <result column="alter_airport2" property="alterAirport2"/>
+        <result column="alter_airport3" property="alterAirport3"/>
+        <result column="alter_route1" property="alterRoute1"/>
+        <result column="alter_route2" property="alterRoute2"/>
+        <result column="alter_route3" property="alterRoute3"/>
+        <result column="alter_route1_point" property="alterRoute1Point"/>
+        <result column="alter_route2_point" property="alterRoute2Point"/>
+        <result column="alter_route3_point" property="alterRoute3Point"/>
+        <result column="alter_company_route1" property="alterCompanyRoute1"/>
+        <result column="alter_company_route2" property="alterCompanyRoute2"/>
+        <result column="alter_company_route3" property="alterCompanyRoute3"/>
+        <result column="alter_route1_fl" property="alterRoute1Fl"/>
+        <result column="alter_route2_fl" property="alterRoute2Fl"/>
+        <result column="alter_route3_fl" property="alterRoute3Fl"/>
+        <result column="alter_route1_wc" property="alterRoute1Wc"/>
+        <result column="alter_route2_wc" property="alterRoute2Wc"/>
+        <result column="alter_route3_wc" property="alterRoute3Wc"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+        <result column="cost_index" property="costIndex"/>
+        <result column="tra_fuel" property="traFuel"/>
+        <result column="takeoff_weight" property="takeoffWeight"/>
+        <result column="land_weight" property="landWeight"/>
+        <result column="av_payload" property="avPayload"/>
+        <result column="opnl_weight" property="opnlWeight"/>
+        <result column="alt_fuel" property="altFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="xre_fuel" property="xreFuel"/>
+        <result column="apu_fuel" property="apuFuel"/>
+        <result column="txo_fuel" property="txoFuel"/>
+        <result column="txi_fuel" property="txiFuel"/>
+        <result column="fob_fuel" property="fobFuel"/>
+        <result column="cruise_altitude" property="cruiseAltitude"/>
+        <result column="route_avg_temp" property="routeAvgTemp"/>
+        <result column="route_avg_wind" property="routeAvgWind"/>
+        <result column="is_main_special" property="mainSpecial"/>
+        <result column="is_alter1_special" property="alter1Special"/>
+        <result column="is_alter2_special" property="alter2Special"/>
+        <result column="is_alter3_special" property="alter3Special"/>
+        <result column="route_change" property="routeChange"/>
+        <result column="route_change_tm" property="routeChangeTm"/>
+    </resultMap>
+
+    <select id="getMaxCfpModifyTime" resultType="java.util.Date">
+        SELECT  MAX(c.foc_modify_tm)  FROM  fms_cfp_ext c
+    </select>
+
+    <select id="getMaxFlightModifyTime" resultType="java.util.Date">
+        SELECT  MAX(c.foc_modify_tm)  FROM  fms_flight c
+    </select>
+
+    <insert id="inserFlight" parameterType="com.simple.core.common.entity.FlightBase">
+         INSERT INTO fms_flight (
+            flight_id,
+            foc_flight_id,
+            flight_no,
+            flight_date,
+            departure_airport,
+            arrival_airport,
+            std,
+            etd,
+            atd,
+            sta,
+            eta,
+            ata,
+            ac_reg ,
+            ac_type ,
+            d_or_i ,
+            dispatch_pass_time ,
+            crew_arrival_time ,
+            flg_vr ,
+            flg_cs,
+            modify_tm,
+            is_dispatch,
+            is_crew_arrival,
+            foc_modify_tm,
+            create_tm,
+            flg_vr1
+             )
+         VALUES(
+            #{flightId,jdbcType=VARCHAR},
+            #{focFlightId,jdbcType=VARCHAR},
+            #{flightNo,jdbcType=VARCHAR},
+            #{flightDate,jdbcType=DATE},
+            #{departureAirport,jdbcType=VARCHAR},
+            #{arrivalAirport,jdbcType=VARCHAR},
+            #{std,jdbcType=DATE},
+            #{etd,jdbcType=DATE},
+            #{atd,jdbcType=DATE},
+            #{sta,jdbcType=DATE},
+            #{eta,jdbcType=DATE},
+            #{ata,jdbcType=DATE},
+            #{acReg,jdbcType=VARCHAR},
+            #{acType,jdbcType=VARCHAR},
+            #{dOrI,jdbcType=VARCHAR},
+            #{dispatchPassTime,jdbcType=DATE},
+            #{crewArrivalTime,jdbcType=DATE},
+            #{flgVR,jdbcType=VARCHAR},
+            #{flgCS,jdbcType=VARCHAR},
+            #{modifyTm,jdbcType=DATE},
+            #{dispatch,jdbcType=VARCHAR},
+            #{crewArrival,jdbcType=VARCHAR},
+            #{focModifyTm,jdbcType=DATE},
+            #{createTm,jdbcType=DATE},
+            #{flgVR1,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <update id="updateFlight" parameterType="com.simple.core.common.entity.FlightBase">
+      UPDATE  fms_flight   SET
+        flight_no=#{flightNo,jdbcType=VARCHAR},
+        flight_date=#{flightDate,jdbcType=DATE},
+        departure_airport=#{departureAirport,jdbcType=VARCHAR},
+        arrival_airport=#{arrivalAirport,jdbcType=VARCHAR},
+        std=#{std,jdbcType=DATE},
+        etd=#{etd,jdbcType=DATE},
+        atd=#{atd,jdbcType=DATE},
+        sta=#{sta,jdbcType=DATE},
+        eta=#{eta,jdbcType=DATE},
+        ata=#{ata,jdbcType=DATE},
+        ac_reg=#{acReg,jdbcType=VARCHAR},
+        ac_type=#{acType,jdbcType=VARCHAR},
+        d_or_i=#{dOrI,jdbcType=VARCHAR},
+        dispatch_pass_time=#{dispatchPassTime,jdbcType=DATE},
+        crew_arrival_time=#{crewArrivalTime,jdbcType=DATE},
+        flg_vr=#{flgVR,jdbcType=VARCHAR},
+        flg_vr1=#{flgVR1,jdbcType=VARCHAR},
+        flg_cs=#{flgCS,jdbcType=VARCHAR},
+        modify_tm=#{modifyTm,jdbcType=DATE},
+        is_dispatch=#{dispatch,jdbcType=VARCHAR},
+        is_crew_arrival=#{crewArrival,jdbcType=VARCHAR},
+        foc_modify_tm=#{focModifyTm,jdbcType=DATE},
+        foc_flight_id=#{focFlightId,jdbcType=VARCHAR}
+        WHERE flight_id=#{flightId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectFlightByFocFlightId" parameterType="java.lang.String" resultMap="resultFlightBase">
+              SELECT
+                flight_id,
+                foc_flight_id,
+                flight_date,
+                flight_no,
+                departure_airport,
+                arrival_airport,
+                std,
+                etd,
+                atd,
+                sta,
+                eta,
+                ata,
+                create_tm,
+                modify_tm,
+                ac_reg,
+                ac_type,
+                d_or_i,
+                dispatch_pass_time,
+                crew_arrival_time,
+                flg_vr,
+                flg_vr1,
+                flg_cs,
+                route_change,
+                route_change_tm,
+                main_route,
+                main_route_point,
+                alter_route1,
+                alter_route2,
+                alter_route3,
+                alter_route1_point,
+                alter_route2_point,
+                alter_route3_point,
+                main_company_route,
+                alter_company_route1,
+                alter_company_route2,
+                alter_company_route3,
+                alter_airport1,
+                alter_airport2,
+                alter_airport3,
+                foc_modify_tm,
+                is_main_special,
+                cost_index,
+                tra_fuel,
+                takeoff_weight,
+                land_weight,
+                av_payload,
+                opnl_weight,
+                alt_fuel,
+                hld_fuel,
+                res_fuel,
+                xtr_fuel,
+                apu_fuel,
+                txo_fuel,
+                txi_fuel,
+                fob_fuel,
+                cruise_altitude,
+                route_avg_temp,
+                route_avg_wind,
+                is_alter1_special,
+                is_alter2_special,
+                is_alter3_special,
+                plan_no,
+                alter_route1_fl,
+                alter_route2_fl,
+                alter_route3_fl,
+                alter_route1_wc,
+                alter_route2_wc,
+                alter_route3_wc,
+                alter_route1_fuel,
+                alter_route2_fuel,
+                alter_route3_fuel
+            FROM fms_flight f
+            WHERE foc_flight_id =#{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectFlightByUnique" parameterType="java.util.Map" resultMap="resultFlightBase">
+        SELECT
+        flight_id,
+        foc_flight_id,
+        flight_date,
+        flight_no,
+        departure_airport,
+        arrival_airport,
+        std,
+        etd,
+        atd,
+        sta,
+        eta,
+        ata,
+        create_tm,
+        modify_tm,
+        ac_reg,
+        ac_type,
+        d_or_i,
+        dispatch_pass_time,
+        crew_arrival_time,
+        flg_vr,
+        flg_vr1,
+        flg_cs,
+        route_change,
+        route_change_tm,
+        main_route,
+        main_route_point,
+        alter_route1,
+        alter_route2,
+        alter_route3,
+        alter_route1_point,
+        alter_route2_point,
+        alter_route3_point,
+        main_company_route,
+        alter_company_route1,
+        alter_company_route2,
+        alter_company_route3,
+        alter_airport1,
+        alter_airport2,
+        alter_airport3,
+        foc_modify_tm,
+        is_main_special,
+        cost_index,
+        tra_fuel,
+        takeoff_weight,
+        land_weight,
+        av_payload,
+        opnl_weight,
+        alt_fuel,
+        hld_fuel,
+        res_fuel,
+        xtr_fuel,
+        apu_fuel,
+        txo_fuel,
+        txi_fuel,
+        fob_fuel,
+        cruise_altitude,
+        route_avg_temp,
+        route_avg_wind,
+        is_alter1_special,
+        is_alter2_special,
+        is_alter3_special,
+        plan_no,
+        alter_route1_fl,
+        alter_route2_fl,
+        alter_route3_fl,
+        alter_route1_wc,
+        alter_route2_wc,
+        alter_route3_wc,
+        alter_route1_fuel,
+        alter_route2_fuel,
+        alter_route3_fuel
+        FROM fms_flight f
+        WHERE flight_date =#{fliDate} and
+        flight_no =#{fliNo} and
+        departure_airport =#{pod} and
+        arrival_airport =#{poa} and
+        std =#{std}
+    </select>
+
+    <!--解析后的飞行计划文件入库-->
+    <update id="updateFlightForPlan" parameterType="com.simple.core.common.entity.FlightBase">
+         UPDATE  fms_flight   SET
+          main_company_route=#{mainCompanyRoute,jdbcType=VARCHAR},
+          main_route=#{mainRoute,jdbcType=VARCHAR},
+          main_route_point=#{mainRoutePoint,jdbcType=VARCHAR},
+          alter_company_route1=#{alterCompanyRoute1,jdbcType=VARCHAR},
+          alter_company_route2=#{alterCompanyRoute2,jdbcType=VARCHAR},
+          alter_company_route3=#{alterCompanyRoute3,jdbcType=VARCHAR},
+          alter_route1=#{alterRoute1,jdbcType=VARCHAR},
+          alter_route2=#{alterRoute2,jdbcType=VARCHAR},
+          alter_route3=#{alterRoute3,jdbcType=VARCHAR},
+          alter_route1_point=#{alterRoute1Point,jdbcType=VARCHAR},
+          alter_route2_point=#{alterRoute2Point,jdbcType=VARCHAR} ,
+          alter_route3_point=#{alterRoute3Point,jdbcType=VARCHAR},
+          alter_airport1=#{alterAirport1,jdbcType=VARCHAR},
+          alter_airport2=#{alterAirport2,jdbcType=VARCHAR},
+          alter_airport3=#{alterAirport3,jdbcType=VARCHAR},
+          route_change=#{routeChange,jdbcType=VARCHAR},
+          route_change_tm=#{routeChangeTm,jdbcType=DATE},
+          is_main_special=#{mainSpecial,jdbcType=INTEGER},
+          cost_index=#{costIndex,jdbcType=VARCHAR},
+          tra_fuel=#{traFuel,jdbcType=VARCHAR},
+          takeoff_weight=#{takeoffWeight,jdbcType=VARCHAR},
+          land_weight=#{landWeight,jdbcType=VARCHAR},
+          av_payload=#{avPayload,jdbcType=VARCHAR},
+          opnl_weight=#{opnlWeight,jdbcType=VARCHAR},
+          alt_fuel=#{altFuel,jdbcType=VARCHAR},
+          hld_fuel=#{hldFuel,jdbcType=VARCHAR},
+          res_fuel=#{resFuel,jdbcType=VARCHAR},
+          xtr_fuel=#{xtrFuel,jdbcType=VARCHAR},
+          apu_fuel=#{apuFuel,jdbcType=VARCHAR},
+          txo_fuel=#{txoFuel,jdbcType=VARCHAR},
+          txi_fuel=#{txiFuel,jdbcType=VARCHAR},
+          fob_fuel=#{fobFuel,jdbcType=VARCHAR},
+          cruise_altitude=#{cruiseAltitude,jdbcType=VARCHAR},
+          route_avg_temp=#{routeAvgTemp,jdbcType=VARCHAR},
+          route_avg_wind=#{routeAvgWind,jdbcType=VARCHAR},
+          is_alter1_special=#{alter1Special,jdbcType=INTEGER},
+          is_alter2_special=#{alter2Special,jdbcType=INTEGER},
+          is_alter3_special=#{alter3Special,jdbcType=INTEGER},
+          plan_no=#{planNo,jdbcType=VARCHAR},
+          alter_route1_fl=#{alterRoute1Fl,jdbcType=VARCHAR},
+          alter_route2_fl=#{alterRoute2Fl,jdbcType=VARCHAR},
+          alter_route3_fl=#{alterRoute3Fl,jdbcType=VARCHAR},
+          alter_route1_wc=#{alterRoute1Wc,jdbcType=VARCHAR},
+          alter_route2_wc=#{alterRoute2Wc,jdbcType=VARCHAR},
+          alter_route3_wc=#{alterRoute3Wc,jdbcType=VARCHAR},
+          alter_route1_fuel=#{alterRoute1Fuel,jdbcType=VARCHAR},
+          alter_route2_fuel=#{alterRoute2Fuel,jdbcType=VARCHAR},
+          alter_route3_fuel=#{alterRoute3Fuel,jdbcType=VARCHAR}
+          WHERE  foc_flight_id=#{focFlightId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findCfpByFocFlightIdPlanNo"  resultMap="resultCfpExt" parameterType="java.util.Map">
+          SELECT
+          cfp_id,
+          cfp_info,
+          md5,
+          create_tm,
+          modify_tm,
+          foc_flight_id,
+          foc_modify_tm,
+          plan_no,
+          main_company_route,
+          main_route,
+          main_route_point,
+          alter_airport1,
+          alter_airport2,
+          alter_airport3,
+          alter_route1,
+          alter_route2,
+          alter_route3,
+          alter_route1_point,
+          alter_route2_point,
+          alter_route3_point,
+          alter_company_route1,
+          alter_company_route2,
+          alter_company_route3,
+          alter_route1_fl,
+          alter_route2_fl,
+          alter_route3_fl,
+          alter_route1_wc,
+          alter_route2_wc,
+          alter_route3_wc,
+          alter_route1_fuel,
+          alter_route2_fuel,
+          alter_route3_fuel,
+          cost_index,
+          tra_fuel,
+          takeoff_weight,
+          land_weight,
+          av_payload,
+          opnl_weight,
+          alt_fuel,
+          hld_fuel,
+          res_fuel,
+          apu_fuel,
+          txo_fuel,
+          txi_fuel,
+          fob_fuel,
+          cruise_altitude,
+          route_avg_temp,
+          route_avg_wind,
+          is_main_special,
+          is_alter1_special,
+          is_alter2_special,
+          is_alter3_special,
+          route_change,
+          route_change_tm
+       FROM fms_cfp_ext
+       WHERE plan_no=#{planNo,jdbcType=VARCHAR} and foc_flight_id=#{focFlightId,jdbcType=VARCHAR}
+    </select>
+
+    <!--解析后的飞行计划文件入库-->
+    <update id="updateCfpInfo" parameterType="com.simple.core.flightimport.entity.CfpExt">
+        update fms_cfp_ext  set
+        cfp_info=#{cfpInfo,jdbcType=BINARY},
+        md5=#{md5,jdbcType=VARCHAR},
+        foc_modify_tm=#{focModifyTm,jdbcType=DATE},
+        modify_tm=#{modifyTm,jdbcType=DATE},
+        foc_flight_id=#{focFlightId,jdbcType=VARCHAR},
+        main_company_route=#{mainCompanyRoute,jdbcType=VARCHAR},
+        main_route=#{mainRoute,jdbcType=VARCHAR},
+        main_route_point=#{mainRoutePoint,jdbcType=VARCHAR},
+        alter_airport1=#{alterAirport1,jdbcType=VARCHAR},
+        alter_airport2=#{alterAirport2,jdbcType=VARCHAR},
+        alter_airport3=#{alterAirport3,jdbcType=VARCHAR},
+        alter_route1=#{alterRoute1,jdbcType=VARCHAR},
+        alter_route2=#{alterRoute2,jdbcType=VARCHAR},
+        alter_route3=#{alterRoute3,jdbcType=VARCHAR},
+        alter_route1_point=#{alterRoute1Point,jdbcType=VARCHAR},
+        alter_route2_point=#{alterRoute2Point,jdbcType=VARCHAR},
+        alter_route3_point=#{alterRoute3Point,jdbcType=VARCHAR},
+        alter_company_route1=#{alterCompanyRoute1,jdbcType=VARCHAR},
+        alter_company_route2=#{alterCompanyRoute2,jdbcType=VARCHAR},
+        alter_company_route3=#{alterCompanyRoute3,jdbcType=VARCHAR},
+        alter_route1_fl=#{alterRoute1Fl,jdbcType=VARCHAR},
+        alter_route2_fl=#{alterRoute2Fl,jdbcType=VARCHAR},
+        alter_route3_fl=#{alterRoute3Fl,jdbcType=VARCHAR},
+        alter_route1_wc=#{alterRoute1Wc,jdbcType=VARCHAR},
+        alter_route2_wc=#{alterRoute2Wc,jdbcType=VARCHAR},
+        alter_route3_wc=#{alterRoute3Wc,jdbcType=VARCHAR},
+        alter_route1_fuel=#{alterRoute1Fuel,jdbcType=VARCHAR},
+        alter_route2_fuel=#{alterRoute2Fuel,jdbcType=VARCHAR},
+        alter_route3_fuel=#{alterRoute3Fuel,jdbcType=VARCHAR},
+        cost_index=#{costIndex,jdbcType=VARCHAR},
+        tra_fuel=#{traFuel,jdbcType=VARCHAR},
+        takeoff_weight=#{takeoffWeight,jdbcType=VARCHAR},
+        land_weight=#{landWeight,jdbcType=VARCHAR},
+        av_payload=#{avPayload,jdbcType=VARCHAR},
+        opnl_weight=#{opnlWeight,jdbcType=VARCHAR},
+        alt_fuel=#{altFuel,jdbcType=VARCHAR},
+        hld_fuel=#{hldFuel,jdbcType=VARCHAR},
+        res_fuel=#{resFuel,jdbcType=VARCHAR},
+        xtr_fuel=#{xtrFuel,jdbcType=VARCHAR},
+        apu_fuel=#{apuFuel,jdbcType=VARCHAR},
+        txo_fuel=#{txoFuel,jdbcType=VARCHAR},
+        txi_fuel=#{txiFuel,jdbcType=VARCHAR},
+        fob_fuel=#{fobFuel,jdbcType=VARCHAR},
+        cruise_altitude=#{cruiseAltitude,jdbcType=VARCHAR},
+        route_avg_temp=#{routeAvgTemp,jdbcType=VARCHAR},
+        route_avg_wind=#{routeAvgWind,jdbcType=VARCHAR},
+        is_main_special=#{mainSpecial,jdbcType=INTEGER},
+        is_alter1_special=#{alter1Special,jdbcType=INTEGER},
+        is_alter2_special=#{alter2Special,jdbcType=INTEGER},
+        is_alter3_special=#{alter3Special,jdbcType=INTEGER},
+        route_change=#{routeChange,jdbcType=VARCHAR},
+        route_change_tm=#{routeChangeTm,jdbcType=DATE},
+        plan_no=#{planNo,jdbcType=VARCHAR}
+        where  cfp_id=#{cfpId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insertCfpInfo" parameterType="com.simple.core.flightimport.entity.CfpExt">
+       INSERT INTO  fms_cfp_ext
+       (  cfp_id,
+          cfp_info,
+          md5,
+          create_tm,
+          modify_tm,
+          foc_flight_id,
+          foc_modify_tm,
+          plan_no,
+          main_company_route,
+          main_route,
+          main_route_point,
+          alter_airport1,
+          alter_airport2,
+          alter_airport3,
+          alter_route1,
+          alter_route2,
+          alter_route3,
+          alter_route1_point,
+          alter_route2_point,
+          alter_route3_point,
+          alter_company_route1,
+          alter_company_route2,
+          alter_company_route3,
+          alter_route1_fl,
+          alter_route2_fl,
+          alter_route3_fl,
+          alter_route1_wc,
+          alter_route2_wc,
+          alter_route3_wc,
+          alter_route1_fuel,
+          alter_route2_fuel,
+          alter_route3_fuel,
+          cost_index,
+          tra_fuel,
+          takeoff_weight,
+          land_weight,
+          av_payload,
+          opnl_weight,
+          alt_fuel,
+          hld_fuel,
+          res_fuel,
+          xtr_fuel,
+          apu_fuel,
+          txo_fuel,
+          txi_fuel,
+          fob_fuel,
+          cruise_altitude,
+          route_avg_temp,
+          route_avg_wind,
+          is_main_special,
+          is_alter1_special,
+          is_alter2_special,
+          is_alter3_special,
+          route_change,
+          route_change_tm)
+       VALUES
+       (#{cfpId,jdbcType=VARCHAR},
+       #{cfpInfo,jdbcType=BINARY},
+       #{md5,jdbcType=VARCHAR},
+       #{createTm,jdbcType=DATE},
+       #{modifyTm,jdbcType=DATE},
+       #{focFlightId,jdbcType=VARCHAR},
+       #{focModifyTm,jdbcType=DATE},
+       #{planNo,jdbcType=VARCHAR},
+       #{mainCompanyRoute,jdbcType=VARCHAR},
+       #{mainRoute,jdbcType=VARCHAR},
+       #{mainRoutePoint,jdbcType=VARCHAR},
+       #{alterAirport1,jdbcType=VARCHAR},
+       #{alterAirport2,jdbcType=VARCHAR},
+       #{alterAirport3,jdbcType=VARCHAR},
+       #{alterRoute1,jdbcType=VARCHAR},
+       #{alterRoute2,jdbcType=VARCHAR},
+       #{alterRoute3,jdbcType=VARCHAR},
+       #{alterRoute1Point,jdbcType=VARCHAR},
+       #{alterRoute2Point,jdbcType=VARCHAR},
+       #{alterRoute3Point,jdbcType=VARCHAR},
+       #{alterCompanyRoute1,jdbcType=VARCHAR},
+       #{alterCompanyRoute2,jdbcType=VARCHAR},
+       #{alterCompanyRoute3,jdbcType=VARCHAR},
+       #{alterRoute1Fl,jdbcType=VARCHAR},
+       #{alterRoute2Fl,jdbcType=VARCHAR},
+       #{alterRoute3Fl,jdbcType=VARCHAR},
+       #{alterRoute1Wc,jdbcType=VARCHAR},
+       #{alterRoute2Wc,jdbcType=VARCHAR},
+       #{alterRoute3Wc,jdbcType=VARCHAR},
+       #{alterRoute1Fuel,jdbcType=VARCHAR},
+       #{alterRoute2Fuel,jdbcType=VARCHAR},
+       #{alterRoute3Fuel,jdbcType=VARCHAR},
+       #{costIndex,jdbcType=VARCHAR},
+       #{traFuel,jdbcType=VARCHAR},
+       #{takeoffWeight,jdbcType=VARCHAR},
+       #{landWeight,jdbcType=VARCHAR},
+       #{avPayload,jdbcType=VARCHAR},
+       #{opnlWeight,jdbcType=VARCHAR},
+       #{altFuel,jdbcType=VARCHAR},
+       #{hldFuel,jdbcType=VARCHAR},
+       #{resFuel,jdbcType=VARCHAR},
+       #{xtrFuel,jdbcType=VARCHAR},
+       #{apuFuel,jdbcType=VARCHAR},
+       #{txoFuel,jdbcType=VARCHAR},
+       #{txiFuel,jdbcType=VARCHAR},
+       #{fobFuel,jdbcType=VARCHAR},
+       #{cruiseAltitude,jdbcType=VARCHAR},
+       #{routeAvgTemp,jdbcType=VARCHAR},
+       #{routeAvgWind,jdbcType=VARCHAR},
+       #{mainSpecial,jdbcType=INTEGER},
+       #{alter1Special,jdbcType=INTEGER},
+       #{alter2Special,jdbcType=INTEGER},
+       #{alter3Special,jdbcType=INTEGER},
+       #{routeChange,jdbcType=VARCHAR},
+       #{routeChangeTm,jdbcType=DATE})
+    </insert>
+
+
+    <insert id="insertWayPoint" parameterType="com.simple.core.flightimport.entity.Cpt">
+        INSERT INTO fms_way_point (cpt_name,lng,lat,modify_tm,create_tm) VALUES(#{cptName},#{lng},#{lat},#{modifyTm},#{createTm})
+    </insert>
+
+    <update id="updateWayPoint" parameterType="com.simple.core.flightimport.entity.Cpt">
+        update fms_way_point set lng=#{lng},lat=#{lat},modify_tm=#{modifyTm}  where cpt_name=#{cptName}
+    </update>
+
+
+    <select id="selectWayPointByCptName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(w.lat) FROM fms_way_point w WHERE w.cpt_name=#{cptName}
+    </select>
+
+    <select id="getFlightIds" parameterType="java.util.Date" resultType="java.lang.String">
+        SELECT foc_flight_id FROM fms_flight WHERE flight_date=#{now}
+    </select>
+
+    <delete id="deleteFlightByIds" parameterType="java.util.List">
+        DELETE FROM fms_flight WHERE  foc_flight_id =
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+
+    <delete id="deleteCfpByIds" parameterType="java.util.List">
+        DELETE FROM fms_cfp_ext WHERE  foc_flight_id =
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+           #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+
+</mapper>

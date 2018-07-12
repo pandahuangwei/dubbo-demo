@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="PwiMapper">
+
+    <resultMap id="resultCpt" type="com.simple.core.flightimport.entity.Cpt">
+        <result column="cpt_name" property="cptName"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="modify_tm" property="modifyTm"/>
+    </resultMap>
+
+    <resultMap id="resultGrib2WdInfo" type="com.simple.core.pwi.entity.Grib2WdInfo">
+        <result column="lon" property="lon"/>
+        <result column="lat" property="lat"/>
+        <result column="atmos_pressure" property="atmosPressure"/>
+        <result column="wind_vel" property="windVel"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="wind_type" property="windType"/>
+
+    </resultMap>
+
+    <select id="findByCptnameForWayPoint" parameterType="java.lang.String" resultMap="resultCpt">
+    SELECT lng,lat FROM fms_way_point WHERE cpt_name=#{cptName}
+    </select>
+
+    <select id="findByCptnameForNaip" parameterType="java.lang.String" resultMap="resultCpt">
+        SELECT lng,lat FROM fms_naip WHERE cpt_name=#{cptName}
+    </select>
+
+    <select id="findByLonLatAlt"  parameterType="java.util.Map" resultMap="resultGrib2WdInfo">
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime1}
+        and end_time = #{etime1}
+        and u.atmos_pressure = #{alt1}
+        and u.lon = #{lon1}
+        and u.lat = #{lat1}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time =#{stime2}
+        and end_time = #{etime2}
+        and u.atmos_pressure = #{alt2}
+        and u.lon = #{lon2}
+        and u.lat = #{lat2}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime3}
+        and end_time =  #{etime3}
+        and u.atmos_pressure = #{alt3}
+        and u.lon = #{lon3}
+        and u.lat = #{lat3}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime4}
+        and end_time = #{etime4}
+        and u.atmos_pressure = #{alt4}
+        and u.lon = #{lon4}
+        and u.lat = #{lat4}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime5}
+        and end_time =  #{etime5}
+        and u.atmos_pressure = #{alt5}
+        and u.lon = #{lon5}
+        and u.lat = #{lat5}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime6}
+        and end_time = #{etime6}
+        and u.atmos_pressure = #{alt6}
+        and u.lon = #{lon6}
+        and u.lat = #{lat6}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime7}
+        and end_time = #{etime7}
+        and u.atmos_pressure = #{alt7}
+        and u.lon = #{lon7}
+        and u.lat = #{lat7}
+        union all
+
+        select u.lon, u.lat, u.atmos_pressure, u.wind_vel, u.wind_type
+        from fms_GRIB2_WD_INFO u
+        where start_time = #{stime8}
+        and end_time = #{etime8}
+        and u.atmos_pressure = #{alt8}
+        and u.lon = #{lon8}
+        and u.lat = #{lat8}
+    </select>
+
+</mapper>

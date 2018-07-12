@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FlightImportMapper">
+
+    <resultMap id="resultFlightBase" type="com.simple.core.common.entity.FlightBase">
+        <result column="flight_id" property="flightId"/>
+        <result column="foc_flight_id" property="focFlightId"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="departure_airport" property="departureAirport"/>
+        <result column="arrival_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="etd" property="etd"/>
+        <result column="atd" property="atd"/>
+        <result column="sta" property="sta"/>
+        <result column="eta" property="eta"/>
+        <result column="ata" property="ata"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="ac_type" property="acType"/>
+        <result column="d_or_i" property="dOrI"/>
+        <result column="dispatch_pass_time" property="dispatchPassTime"/>
+        <result column="is_dispatch" property="dispatch"/>
+        <result column="crew_arrival_time" property="crewArrivalTime"/>
+        <result column="is_crew_arrival" property="crewArrival"/>
+        <result column="flg_vr" property="flgVR"/>
+        <result column="flg_vr1" property="flgVR1"/>
+        <result column="flg_cs" property="flgCS"/>
+        <result column="foc_modify_tm" property="focModifyTm"/>
+        <result column="route_change" property="routeChange"/>
+        <result column="route_change_tm" property="routeChangeTm"/>
+        <result column="main_route" property="mainRoute"/>
+        <result column="main_route_point" property="mainRoutePoint"/>
+        <result column="alter_route1" property="alterRoute1"/>
+        <result column="alter_route2" property="alterRoute2"/>
+        <result column="alter_route3" property="alterRoute3"/>
+        <result column="alter_route1_point" property="alterRoute1Point"/>
+        <result column="alter_route2_point" property="alterRoute2Point"/>
+        <result column="alter_route3_point" property="alterRoute3Point"/>
+        <result column="main_company_route" property="mainCompanyRoute"/>
+        <result column="alter_company_route1" property="alterCompanyRoute1"/>
+        <result column="alter_company_route2" property="alterCompanyRoute2"/>
+        <result column="alter_company_route3" property="alterCompanyRoute3"/>
+        <result column="alter_airport1" property="alterAirport1"/>
+        <result column="alter_airport2" property="alterAirport2"/>
+        <result column="alter_airport3" property="alterAirport3"/>
+        <result column="is_main_special" property="mainSpecial"/>
+        <result column="is_alter1_special" property="alter1Special"/>
+        <result column="is_alter2_special" property="alter2Special"/>
+        <result column="is_alter3_special" property="alter3Special"/>
+        <result column="cost_index" property="costIndex"/>
+        <result column="tra_fuel" property="traFuel"/>
+        <result column="takeoff_weight" property="takeoffWeight"/>
+        <result column="land_weight" property="landWeight"/>
+        <result column="av_payload" property="avPayload"/>
+        <result column="opnl_weight" property="opnlWeight"/>
+        <result column="alt_fuel" property="altFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="res_fuel" property="resFuel"/>
+        <result column="xtr_fuel" property="xtrFuel"/>
+        <result column="apu_fuel" property="apuFuel"/>
+        <result column="txo_fuel" property="txoFuel"/>
+        <result column="txi_fuel" property="txiFuel"/>
+        <result column="fob_fuel" property="fobFuel"/>
+        <result column="cruise_altitude" property="cruiseAltitude"/>
+        <result column="route_avg_temp" property="routeAvgTemp"/>
+        <result column="route_avg_wind" property="routeAvgWind"/>
+        <result column="plan_no" property="planNo"/>
+        <result column="alter_route1_fl" property="alterRoute1Fl"/>
+        <result column="alter_route2_fl" property="alterRoute2Fl"/>
+        <result column="alter_route3_fl" property="alterRoute3Fl"/>
+        <result column="alter_route1_wc" property="alterRoute1Wc"/>
+        <result column="alter_route2_wc" property="alterRoute2Wc"/>
+        <result column="alter_route3_wc" property="alterRoute3Wc"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+    </resultMap>
+
+    <resultMap id="resultCfpExt" type="com.simple.core.flightimport.entity.CfpExt">
+        <result column="cfp_id" property="cfpId"/>
+        <result column="foc_flight_id" property="focFlightId"/>
+        <result column="cfp_info" property="cfpInfo"/>
+        <result column="md5" property="md5"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="foc_modify_tm" property="focModifyTm"/>
+        <result column="plan_no" property="planNo"/>
+        <result column="main_company_route" property="mainCompanyRoute"/>
+        <result column="main_route" property="mainRoute"/>
+        <result column="main_route_point" property="mainRoutePoint"/>
+        <result column="alter_airport1" property="alterAirport1"/>
+        <result column="alter_airport2" property="alterAirport2"/>
+        <result column="alter_airport3" property="alterAirport3"/>
+        <result column="alter_route1" property="alterRoute1"/>
+        <result column="alter_route2" property="alterRoute2"/>
+        <result column="alter_route3" property="alterRoute3"/>
+        <result column="alter_route1_point" property="alterRoute1Point"/>
+        <result column="alter_route2_point" property="alterRoute2Point"/>
+        <result column="alter_route3_point" property="alterRoute3Point"/>
+        <result column="alter_company_route1" property="alterCompanyRoute1"/>
+        <result column="alter_company_route2" property="alterCompanyRoute2"/>
+        <result column="alter_company_route3" property="alterCompanyRoute3"/>
+        <result column="alter_route1_fl" property="alterRoute1Fl"/>
+        <result column="alter_route2_fl" property="alterRoute2Fl"/>
+        <result column="alter_route3_fl" property="alterRoute3Fl"/>
+        <result column="alter_route1_wc" property="alterRoute1Wc"/>
+        <result column="alter_route2_wc" property="alterRoute2Wc"/>
+        <result column="alter_route3_wc" property="alterRoute3Wc"/>
+        <result column="alter_route1_fuel" property="alterRoute1Fuel"/>
+        <result column="alter_route2_fuel" property="alterRoute2Fuel"/>
+        <result column="alter_route3_fuel" property="alterRoute3Fuel"/>
+        <result column="cost_index" property="costIndex"/>
+        <result column="tra_fuel" property="traFuel"/>
+        <result column="takeoff_weight" property="takeoffWeight"/>
+        <result column="land_weight" property="landWeight"/>
+        <result column="av_payload" property="avPayload"/>
+        <result column="opnl_weight" property="opnlWeight"/>
+        <result column="alt_fuel" property="altFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="xre_fuel" property="xreFuel"/>
+        <result column="apu_fuel" property="apuFuel"/>
+        <result column="txo_fuel" property="txoFuel"/>
+        <result column="txi_fuel" property="txiFuel"/>
+        <result column="fob_fuel" property="fobFuel"/>
+        <result column="cruise_altitude" property="cruiseAltitude"/>
+        <result column="route_avg_temp" property="routeAvgTemp"/>
+        <result column="route_avg_wind" property="routeAvgWind"/>
+        <result column="is_main_special" property="mainSpecial"/>
+        <result column="is_alter1_special" property="alter1Special"/>
+        <result column="is_alter2_special" property="alter2Special"/>
+        <result column="is_alter3_special" property="alter3Special"/>
+        <result column="route_change" property="routeChange"/>
+        <result column="route_change_tm" property="routeChangeTm"/>
+    </resultMap>
+
+    <select id="getMaxCfpModifyTime" resultType="java.util.Date">
+        SELECT  MAX(c.foc_modify_tm)  FROM  fms_cfp_ext c
+    </select>
+
+    <select id="getMaxFlightModifyTime" resultType="java.util.Date">
+        SELECT  MAX(c.foc_modify_tm)  FROM  fms_flight c
+    </select>
+
+    <insert id="inserFlight" parameterType="com.simple.core.common.entity.FlightBase">
+         INSERT INTO fms_flight (
+            flight_id,
+            foc_flight_id,
+            flight_no,
+            flight_date,
+            departure_airport,
+            arrival_airport,
+            std,
+            etd,
+            atd,
+            sta,
+            eta,
+            ata,
+            ac_reg ,
+            ac_type ,
+            d_or_i ,
+            dispatch_pass_time ,
+            crew_arrival_time ,
+            flg_vr ,
+            flg_cs,
+            modify_tm,
+            is_dispatch,
+            is_crew_arrival,
+            foc_modify_tm,
+            create_tm,
+            flg_vr1
+             )
+         VALUES(
+            #{flightId},
+            #{focFlightId},
+            #{flightNo},
+            #{flightDate},
+            #{departureAirport},
+            #{arrivalAirport},
+            #{std},
+            #{etd},
+            #{atd},
+            #{sta},
+            #{eta},
+            #{ata},
+            #{acReg},
+            #{acType},
+            #{dOrI},
+            #{dispatchPassTime},
+            #{crewArrivalTime},
+            #{flgVR},
+            #{flgCS},
+            #{modifyTm},
+            #{dispatch},
+            #{crewArrival},
+            #{focModifyTm},
+            #{createTm},
+            #{flgVR1}
+            )
+    </insert>
+
+    <update id="updateFlight" parameterType="com.simple.core.common.entity.FlightBase">
+      UPDATE  fms_flight   SET
+        flight_no=#{flightNo},
+        flight_date=#{flightDate},
+        departure_airport=#{departureAirport},
+        arrival_airport=#{arrivalAirport},
+        std=#{std},
+        etd=#{etd},
+        atd=#{atd},
+        sta=#{sta},
+        eta=#{eta},
+        ata=#{ata},
+        ac_reg=#{acReg},
+        ac_type=#{acType},
+        d_or_i=#{dOrI},
+        dispatch_pass_time=#{dispatchPassTime},
+        crew_arrival_time=#{crewArrivalTime},
+        flg_vr=#{flgVR},
+        flg_vr1=#{flgVR1},
+        flg_cs=#{flgCS},
+        modify_tm=#{modifyTm},
+        is_dispatch=#{dispatch},
+        is_crew_arrival=#{crewArrival},
+        foc_modify_tm=#{focModifyTm},
+        foc_flight_id=#{focFlightId}
+        WHERE flight_id=#{flightId}
+    </update>
+
+    <select id="selectFlightByFocFlightId" parameterType="java.lang.String" resultMap="resultFlightBase">
+              SELECT
+                flight_id,
+                foc_flight_id,
+                flight_date,
+                flight_no,
+                departure_airport,
+                arrival_airport,
+                std,
+                etd,
+                atd,
+                sta,
+                eta,
+                ata,
+                create_tm,
+                modify_tm,
+                ac_reg,
+                ac_type,
+                d_or_i,
+                dispatch_pass_time,
+                crew_arrival_time,
+                flg_vr,
+                flg_vr1,
+                flg_cs,
+                route_change,
+                route_change_tm,
+                main_route,
+                main_route_point,
+                alter_route1,
+                alter_route2,
+                alter_route3,
+                alter_route1_point,
+                alter_route2_point,
+                alter_route3_point,
+                main_company_route,
+                alter_company_route1,
+                alter_company_route2,
+                alter_company_route3,
+                alter_airport1,
+                alter_airport2,
+                alter_airport3,
+                foc_modify_tm,
+                is_main_special,
+                cost_index,
+                tra_fuel,
+                takeoff_weight,
+                land_weight,
+                av_payload,
+                opnl_weight,
+                alt_fuel,
+                hld_fuel,
+                res_fuel,
+                xtr_fuel,
+                apu_fuel,
+                txo_fuel,
+                txi_fuel,
+                fob_fuel,
+                cruise_altitude,
+                route_avg_temp,
+                route_avg_wind,
+                is_alter1_special,
+                is_alter2_special,
+                is_alter3_special,
+                plan_no,
+                alter_route1_fl,
+                alter_route2_fl,
+                alter_route3_fl,
+                alter_route1_wc,
+                alter_route2_wc,
+                alter_route3_wc,
+                alter_route1_fuel,
+                alter_route2_fuel,
+                alter_route3_fuel
+            FROM fms_flight f
+            WHERE foc_flight_id =#{id}
+    </select>
+
+    <select id="selectFlightByUnique" parameterType="java.util.Map" resultMap="resultFlightBase">
+        SELECT
+        flight_id,
+        foc_flight_id,
+        flight_date,
+        flight_no,
+        departure_airport,
+        arrival_airport,
+        std,
+        etd,
+        atd,
+        sta,
+        eta,
+        ata,
+        create_tm,
+        modify_tm,
+        ac_reg,
+        ac_type,
+        d_or_i,
+        dispatch_pass_time,
+        crew_arrival_time,
+        flg_vr,
+        flg_vr1,
+        flg_cs,
+        route_change,
+        route_change_tm,
+        main_route,
+        main_route_point,
+        alter_route1,
+        alter_route2,
+        alter_route3,
+        alter_route1_point,
+        alter_route2_point,
+        alter_route3_point,
+        main_company_route,
+        alter_company_route1,
+        alter_company_route2,
+        alter_company_route3,
+        alter_airport1,
+        alter_airport2,
+        alter_airport3,
+        foc_modify_tm,
+        is_main_special,
+        cost_index,
+        tra_fuel,
+        takeoff_weight,
+        land_weight,
+        av_payload,
+        opnl_weight,
+        alt_fuel,
+        hld_fuel,
+        res_fuel,
+        xtr_fuel,
+        apu_fuel,
+        txo_fuel,
+        txi_fuel,
+        fob_fuel,
+        cruise_altitude,
+        route_avg_temp,
+        route_avg_wind,
+        is_alter1_special,
+        is_alter2_special,
+        is_alter3_special,
+        plan_no,
+        alter_route1_fl,
+        alter_route2_fl,
+        alter_route3_fl,
+        alter_route1_wc,
+        alter_route2_wc,
+        alter_route3_wc,
+        alter_route1_fuel,
+        alter_route2_fuel,
+        alter_route3_fuel
+        FROM fms_flight f
+        WHERE flight_date =#{fliDate} and
+        flight_no =#{fliNo} and
+        departure_airport =#{pod} and
+        arrival_airport =#{poa} and
+        std =#{std}
+    </select>
+
+    <!--解析后的飞行计划文件入库-->
+    <update id="updateFlightForPlan" parameterType="com.simple.core.common.entity.FlightBase">
+         UPDATE  fms_flight   SET
+          main_company_route=#{mainCompanyRoute},
+          main_route=#{mainRoute},
+          main_route_point=#{mainRoutePoint},
+          alter_company_route1=#{alterCompanyRoute1},
+          alter_company_route2=#{alterCompanyRoute2},
+          alter_company_route3=#{alterCompanyRoute3},
+          alter_route1=#{alterRoute1},
+          alter_route2=#{alterRoute2},
+          alter_route3=#{alterRoute3},
+          alter_route1_point=#{alterRoute1Point},
+          alter_route2_point=#{alterRoute2Point} ,
+          alter_route3_point=#{alterRoute3Point},
+          alter_airport1=#{alterAirport1},
+          alter_airport2=#{alterAirport2},
+          alter_airport3=#{alterAirport3},
+          route_change=#{routeChange},
+          route_change_tm=#{routeChangeTm},
+          is_main_special=#{mainSpecial},
+          cost_index=#{costIndex},
+          tra_fuel=#{traFuel},
+          takeoff_weight=#{takeoffWeight},
+          land_weight=#{landWeight},
+          av_payload=#{avPayload},
+          opnl_weight=#{opnlWeight},
+          alt_fuel=#{altFuel},
+          hld_fuel=#{hldFuel},
+          res_fuel=#{resFuel},
+          xtr_fuel=#{xtrFuel},
+          apu_fuel=#{apuFuel},
+          txo_fuel=#{txoFuel},
+          txi_fuel=#{txiFuel},
+          fob_fuel=#{fobFuel},
+          cruise_altitude=#{cruiseAltitude},
+          route_avg_temp=#{routeAvgTemp},
+          route_avg_wind=#{routeAvgWind},
+          is_alter1_special=#{alter1Special},
+          is_alter2_special=#{alter2Special},
+          is_alter3_special=#{alter3Special},
+          plan_no=#{planNo},
+          alter_route1_fl=#{alterRoute1Fl},
+          alter_route2_fl=#{alterRoute2Fl},
+          alter_route3_fl=#{alterRoute3Fl},
+          alter_route1_wc=#{alterRoute1Wc},
+          alter_route2_wc=#{alterRoute2Wc},
+          alter_route3_wc=#{alterRoute3Wc},
+          alter_route1_fuel=#{alterRoute1Fuel},
+          alter_route2_fuel=#{alterRoute2Fuel},
+          alter_route3_fuel=#{alterRoute3Fuel}
+          WHERE  foc_flight_id=#{focFlightId}
+    </update>
+
+    <select id="findCfpByFocFlightIdPlanNo"  resultMap="resultCfpExt" parameterType="java.util.Map">
+          SELECT
+          cfp_id,
+          cfp_info,
+          md5,
+          create_tm,
+          modify_tm,
+          foc_flight_id,
+          foc_modify_tm,
+          plan_no,
+          main_company_route,
+          main_route,
+          main_route_point,
+          alter_airport1,
+          alter_airport2,
+          alter_airport3,
+          alter_route1,
+          alter_route2,
+          alter_route3,
+          alter_route1_point,
+          alter_route2_point,
+          alter_route3_point,
+          alter_company_route1,
+          alter_company_route2,
+          alter_company_route3,
+          alter_route1_fl,
+          alter_route2_fl,
+          alter_route3_fl,
+          alter_route1_wc,
+          alter_route2_wc,
+          alter_route3_wc,
+          alter_route1_fuel,
+          alter_route2_fuel,
+          alter_route3_fuel,
+          cost_index,
+          tra_fuel,
+          takeoff_weight,
+          land_weight,
+          av_payload,
+          opnl_weight,
+          alt_fuel,
+          hld_fuel,
+          res_fuel,
+          apu_fuel,
+          txo_fuel,
+          txi_fuel,
+          fob_fuel,
+          cruise_altitude,
+          route_avg_temp,
+          route_avg_wind,
+          is_main_special,
+          is_alter1_special,
+          is_alter2_special,
+          is_alter3_special,
+          route_change,
+          route_change_tm
+       FROM fms_cfp_ext
+       WHERE plan_no=#{plan_no} and foc_flight_id=#{foc_flight_id}
+    </select>
+
+    <!--解析后的飞行计划文件入库-->
+    <update id="updateCfpInfo" parameterType="com.simple.core.flightimport.entity.CfpExt">
+        update fms_cfp_ext  set
+        cfp_info=#{cfpInfo},
+        md5=#{md5},
+        foc_modify_tm=#{focModifyTm},
+        modify_tm=#{modifyTm},
+        foc_flight_id=#{focFlightId},
+        main_company_route=#{mainCompanyRoute},
+        main_route=#{mainRoute},
+        main_route_point=#{mainRoutePoint},
+        alter_airport1=#{alterAirport1},
+        alter_airport2=#{alterAirport2},
+        alter_airport3=#{alterAirport3},
+        alter_route1=#{alterRoute1},
+        alter_route2=#{alterRoute2},
+        alter_route3=#{alterRoute3},
+        alter_route1_point=#{alterRoute1Point},
+        alter_route2_point=#{alterRoute2Point},
+        alter_route3_point=#{alterRoute3Point},
+        alter_company_route1=#{alterCompanyRoute1},
+        alter_company_route2=#{alterCompanyRoute2},
+        alter_company_route3=#{alterCompanyRoute3},
+        alter_route1_fl=#{alterRoute1Fl},
+        alter_route2_fl=#{alterRoute2Fl},
+        alter_route3_fl=#{alterRoute3Fl},
+        alter_route1_wc=#{alterRoute1Wc},
+        alter_route2_wc=#{alterRoute2Wc},
+        alter_route3_wc=#{alterRoute3Wc},
+        alter_route1_fuel=#{alterRoute1Fuel},
+        alter_route2_fuel=#{alterRoute2Fuel},
+        alter_route3_fuel=#{alterRoute3Fuel},
+        cost_index=#{costIndex},
+        tra_fuel=#{traFuel},
+        takeoff_weight=#{takeoffWeight},
+        land_weight=#{landWeight},
+        av_payload=#{avPayload},
+        opnl_weight=#{opnlWeight},
+        alt_fuel=#{altFuel},
+        hld_fuel=#{hldFuel},
+        res_fuel=#{resFuel},
+        xtr_fuel=#{xtrFuel},
+        apu_fuel=#{apuFuel},
+        txo_fuel=#{txoFuel},
+        txi_fuel=#{txiFuel},
+        fob_fuel=#{fobFuel},
+        cruise_altitude=#{cruiseAltitude},
+        route_avg_temp=#{routeAvgTemp},
+        route_avg_wind=#{routeAvgWind},
+        is_main_special=#{mainSpecial},
+        is_alter1_special=#{alter1Special},
+        is_alter2_special=#{alter2Special},
+        is_alter3_special=#{alter3Special},
+        route_change=#{routeChange},
+        route_change_tm=#{routeChangeTm},
+        plan_no=#{planNo}
+        where  cfp_id=#{cfpId}
+    </update>
+
+    <insert id="insertCfpInfo" parameterType="com.simple.core.flightimport.entity.CfpExt">
+       INSERT INTO  fms_cfp_ext
+       (  cfp_id,
+          cfp_info,
+          md5,
+          create_tm,
+          modify_tm,
+          foc_flight_id,
+          foc_modify_tm,
+          plan_no,
+          main_company_route,
+          main_route,
+          main_route_point,
+          alter_airport1,
+          alter_airport2,
+          alter_airport3,
+          alter_route1,
+          alter_route2,
+          alter_route3,
+          alter_route1_point,
+          alter_route2_point,
+          alter_route3_point,
+          alter_company_route1,
+          alter_company_route2,
+          alter_company_route3,
+          alter_route1_fl,
+          alter_route2_fl,
+          alter_route3_fl,
+          alter_route1_wc,
+          alter_route2_wc,
+          alter_route3_wc,
+          alter_route1_fuel,
+          alter_route2_fuel,
+          alter_route3_fuel,
+          cost_index,
+          tra_fuel,
+          takeoff_weight,
+          land_weight,
+          av_payload,
+          opnl_weight,
+          alt_fuel,
+          hld_fuel,
+          res_fuel,
+          xtr_fuel,
+          apu_fuel,
+          txo_fuel,
+          txi_fuel,
+          fob_fuel,
+          cruise_altitude,
+          route_avg_temp,
+          route_avg_wind,
+          is_main_special,
+          is_alter1_special,
+          is_alter2_special,
+          is_alter3_special,
+          route_change,
+          route_change_tm)
+       VALUES
+       (#{cfpId},
+       #{cfpInfo},
+       #{md5},
+       #{createTm},
+       #{modifyTm},
+       #{focFlightId},
+       #{focModifyTm},
+       #{planNo},
+       #{mainCompanyRoute},
+       #{mainRoute},
+       #{mainRoutePoint},
+       #{alterAirport1},
+       #{alterAirport2},
+       #{alterAirport3},
+       #{alterRoute1},
+       #{alterRoute2},
+       #{alterRoute3},
+       #{alterRoute1Point},
+       #{alterRoute2Point},
+       #{alterRoute3Point},
+       #{alterCompanyRoute1},
+       #{alterCompanyRoute2},
+       #{alterCompanyRoute3},
+       #{alterRoute1Fl},
+       #{alterRoute2Fl},
+       #{alterRoute3Fl},
+       #{alterRoute1Wc},
+       #{alterRoute2Wc},
+       #{alterRoute3Wc},
+       #{alterRoute1Fuel},
+       #{alterRoute2Fuel},
+       #{alterRoute3Fuel},
+       #{costIndex},
+       #{traFuel},
+       #{takeoffWeight},
+       #{landWeight},
+       #{avPayload},
+       #{opnlWeight},
+       #{altFuel},
+       #{hldFuel},
+       #{resFuel},
+       #{xtrFuel},
+       #{apuFuel},
+       #{txoFuel},
+       #{txiFuel},
+       #{fobFuel},
+       #{cruiseAltitude},
+       #{routeAvgTemp},
+       #{routeAvgWind},
+       #{mainSpecial},
+       #{alter1Special},
+       #{alter2Special},
+       #{alter3Special},
+       #{routeChange},
+       #{routeChangeTm})
+    </insert>
+
+    <insert id="insertWayPoint" parameterType="com.simple.core.flightimport.entity.Cpt">
+        INSERT INTO fms_way_point (cpt_name,lng,lat,modify_tm,create_tm) VALUES(#{cptName},#{lng},#{lat},#{modifyTm},#{createTm})
+    </insert>
+
+    <update id="updateWayPoint" parameterType="com.simple.core.flightimport.entity.Cpt">
+        update fms_way_point set lng=#{lng},lat=#{lat},modify_tm=#{modifyTm}  where cpt_name=#{cptName}
+    </update>
+
+
+    <select id="selectWayPointByCptName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(w.lat) FROM fms_way_point w WHERE w.cpt_name=#{cptName}
+    </select>
+
+    <select id="getFlightIds" parameterType="java.util.Date" resultType="java.lang.String">
+        SELECT foc_flight_id FROM fms_flight WHERE flight_date=#{now}
+    </select>
+
+    <delete id="deleteFlightByIds" parameterType="java.util.List">
+        DELETE FROM fms_flight WHERE  foc_flight_id =
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteCfpByIds" parameterType="java.util.List">
+        DELETE FROM fms_cfp_ext WHERE  foc_flight_id =
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+           #{id}
+        </foreach>
+    </delete>
+
+</mapper>

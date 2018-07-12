@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.simple</groupId>
+    <artifactId>fms-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>${fms-parent.version}</version>
+
+    <name>${project.artifactId}</name>
+    <description>FMS系统</description>
+    <url>http://www.simple-air.com/</url>
+
+    <!--本地库与私有库-->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://192.168.1.21:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://192.168.1.21:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <modules>
+        <module>fms-common</module>
+        <module>fms-common-config</module>
+        <module>fms-core-service</module>
+        <module>fms-service-charg</module>
+        <module>fms-service-route</module>
+        <module>fms-service-foc</module>
+        <module>fms-service-flightimport</module>
+        <module>fms-service-fpn</module>
+        <module>fms-service-per</module>
+        <module>fms-service-pwi</module>
+        <module>fms-service-freetext</module>
+        <module>web-fms</module>
+        <module>fms-service-grib2import</module>
+    </modules>
+
+    <!--属性，版本定义-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- FMS projects -->
+        <fms-parent.version>1.0</fms-parent.version>
+        <fms-common.version>1.0</fms-common.version>
+        <fms-common-config.version>1.0</fms-common-config.version>
+
+        <fms-core-service.version>1.0</fms-core-service.version>
+        <fms-service-charg.version>1.0</fms-service-charg.version>
+        <fms-service-route.version>1.0</fms-service-route.version>
+        <fms-service-fpn.version>1.0</fms-service-fpn.version>
+        <fms-service-per.version>1.0</fms-service-per.version>
+        <fms-service-freetext.version>1.0</fms-service-freetext.version>
+        <fms-service-pwi.version>1.0</fms-service-pwi.version>
+        <fms-service-foc.version>1.0</fms-service-foc.version>
+        <fms-service-flightimport.version>1.0</fms-service-flightimport.version>
+        <fms-service-grib2import.version>1.0</fms-service-grib2import.version>
+
+        <!-- dependencies verison -->
+        <fms-dubbo.version>2.8.4</fms-dubbo.version>
+
+        <asm_version>5.1</asm_version>
+        <antlr_version>2.7.7</antlr_version>
+        <aopalliance_version>1.0</aopalliance_version>
+        <aspectjweaver_version>1.8.9</aspectjweaver_version>
+        <activemq_version>5.14.4</activemq_version>
+
+        <bsf_version>3.1</bsf_version>
+        <curator_version>2.5.0</curator_version>
+        <cxf_version>3.1.10</cxf_version>
+        <cglib_version>3.2.4</cglib_version>
+
+        <commons_net_version>3.3</commons_net_version>
+        <commons_beanutils_version>1.9.2</commons_beanutils_version>
+        <commons_collections_version>3.2.2</commons_collections_version>
+        <commons_logging_version>1.2</commons_logging_version>
+        <commons_codec_version>1.10</commons_codec_version>
+        <commons_digester_version>2.1</commons_digester_version>
+        <commons_fileupload_version>1.3.2</commons_fileupload_version>
+        <commons_io_version>2.4</commons_io_version>
+        <commons_validator_version>1.5.1</commons_validator_version>
+        <commons_cli_version>1.3.1</commons_cli_version>
+        <commons_pool2_version>2.4.2</commons_pool2_version>
+        <commons_dbcp_version>1.4</commons_dbcp_version>
+        <commons-configuration.version>1.7</commons-configuration.version>
+        <commons_pool_version>1.6</commons_pool_version>
+
+        <dom4j_version>1.6.1</dom4j_version>
+        <druid_version>1.0.27</druid_version>
+        <fastjson_version>1.2.23</fastjson_version>
+        <fst_version>1.55</fst_version>
+
+        <jdk_version>1.7</jdk_version>
+        <jdk_source_version>1.7</jdk_source_version>
+        <jdk_target_version>1.7</jdk_target_version>
+
+        <org.javassist_version>3.21.0-GA</org.javassist_version>
+        <oracle_version>11.2.0</oracle_version>
+
+        <junit_version>4.12</junit_version>
+        <javax.anno_version>1.2</javax.anno_version>
+        <jackson_version>1.9.13</jackson_version>
+        <jetty_version>6.1.26</jetty_version>
+        <jedis_version>2.9.0</jedis_version>
+        <javax_cache_version>0.4</javax_cache_version>
+        <jstl_version>1.2</jstl_version>
+
+        <hessian_version>4.0.7</hessian_version>
+        <hibernate_version>4.2.0.Final</hibernate_version>
+        <httpclient_version>4.2.1</httpclient_version>
+      <!--  <httpclient_version>4.5.2</httpclient_version>-->
+
+        <lifecycle_mapping_version>1.0.0</lifecycle_mapping_version>
+
+        <validation_version>1.0.0.GA</validation_version>
+        <servlet_version>3.1.0</servlet_version>
+        <wsrs_version>2.0</wsrs_version>
+
+        <grizzly_version>2.1.4</grizzly_version>
+
+        <resteasy_version>3.0.19.Final</resteasy_version>
+        <tomcat_embed_version>8.0.11</tomcat_embed_version>
+
+        <zookeeper_version>3.4.9</zookeeper_version>
+        <zkclient_version>0.1</zkclient_version>
+
+        <netty_version>3.10.5.Final</netty_version>
+        <xstream_version>1.4.1</xstream_version>
+
+        <libthrift_version>0.8.0</libthrift_version>
+        <javassist_version>3.12.1.GA</javassist_version>
+        <jodatime_version>2.9.7</jodatime_version>
+
+        <slf4j_version>1.7.5</slf4j_version>
+        <log4j_version>1.2.17</log4j_version>
+
+        <oro_version>2.0.8</oro_version>
+        <ognl_version>3.1.11</ognl_version>
+        <quartz.version>2.2.3</quartz.version>
+
+        <kryo_version>2.24.0</kryo_version>
+        <kryo_serializers_version>0.26</kryo_serializers_version>
+
+        <xmemcached_version>1.3.6</xmemcached_version>
+        <xalan_version>2.7.1</xalan_version>
+
+        <lang3_version>3.1</lang3_version>
+        <lang_version>2.6</lang_version>
+
+        <mina_version>1.1.7</mina_version>
+
+        <mysql_version>5.1.40</mysql_version>
+        <mybatis_version>3.4.1</mybatis_version>
+        <mybatis_spring_version>1.3.0</mybatis_spring_version>
+
+        <maven_source_version>3.0.1</maven_source_version>
+        <maven_compiler_version>3.6.0</maven_compiler_version>
+        <maven_eclipse_version>2.10</maven_eclipse_version>
+        <maven_deploy_version>2.8.2</maven_deploy_version>
+        <maven_assembly_version>3.0.0</maven_assembly_version>
+
+        <ezmorph_version>1.0.6</ezmorph_version>
+
+        <ws_axis_version>1.4</ws_axis_version>
+        <ws_rpc_version>3.1</ws_rpc_version>
+        <ws_discovery_version>0.5</ws_discovery_version>
+
+        <!-- frameworks -->
+        <!-- spring 版本 3.2.4.RELEASE  3.2.9.RELEASE  4.2.4.RELEASE-->
+        <spring.bom.version>3.2.9.RELEASE</spring.bom.version>
+    </properties>
+
+
+    <dependencies>
+        <!-- Test Dependency Begin -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit_version}</version>
+        </dependency>
+        <!-- Test Dependency End -->
+    </dependencies>
+
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>com.aerox</groupId>
+                <artifactId>aerox-framework</artifactId>
+                <version>1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${fms-dubbo.version}</version>
+            </dependency>
+
+            <!-- Common Dependency Begin -->
+            <dependency>
+                <groupId>xalan</groupId>
+                <artifactId>xalan</artifactId>
+                <version>${xalan_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>antlr</groupId>
+                <artifactId>antlr</artifactId>
+                <version>${antlr_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${asm_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>2.3</version>
+                <classifier>jdk15</classifier>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${jackson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ognl</groupId>
+                <artifactId>ognl</artifactId>
+                <version>${ognl_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>oro</groupId>
+                <artifactId>oro</artifactId>
+                <version>${oro_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons_net_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons_beanutils_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons_codec_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons_collections_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-digester</groupId>
+                <artifactId>commons-digester</artifactId>
+                <version>${commons_digester_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons_fileupload_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons_io_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${lang3_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${lang_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons_logging_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons_validator_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-cli</groupId>
+                <artifactId>commons-cli</artifactId>
+                <version>${commons_cli_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons_pool2_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>${commons_pool_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.ezmorph</groupId>
+                <artifactId>ezmorph</artifactId>
+                <version>${ezmorph_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${jodatime_version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
+         <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-simple</artifactId>
+                <version>${cxf_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${cxf_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf_version}</version>
+            </dependency>
+
+            <!-- webService Dependency Begin -->
+            <dependency>
+                <groupId>org.apache.axis</groupId>
+                <artifactId>axis</artifactId>
+                <version>${ws_axis_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.xml.rpc</artifactId>
+                <version>${ws_rpc_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-discovery</groupId>
+                <artifactId>commons-discovery</artifactId>
+                <version>${ws_discovery_version}</version>
+            </dependency>
+            <!-- webService Dependency End -->
+
+            <!--jboss start 3.0.7.Final REST风格远程调用-->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-netty</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+
+            <!-- 使用json序列化 -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson-provider</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+            <!-- 使用xml序列化 -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxb-provider</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+            <!--jboss end -->
+
+            <!-- 使用Sun HTTP server -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jdk-http</artifactId>
+                <version>${resteasy_version}</version>
+            </dependency>
+            <!-- 使用tomcat server -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat_embed_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-logging-juli</artifactId>
+                <version>${tomcat_embed_version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.jexcelapi</groupId>
+                <artifactId>jxl</artifactId>
+                <version>2.6.12</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jdom</groupId>
+                <artifactId>jdom</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>jaxen</groupId>
+                <artifactId>jaxen</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${wsrs_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax.anno_version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.mina</groupId>
+                <artifactId>mina-core</artifactId>
+                <version>${mina_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.grizzly</groupId>
+                <artifactId>grizzly-core</artifactId>
+                <version>${grizzly_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient_version}</version>
+            </dependency>
+
+            <!-- Common Dependency End -->
+            <!-- Zookeeper 用于分布式服务管理 -->
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.sgroschupf</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient_version}</version>
+            </dependency>
+            <!--  <dependency>
+                  <groupId>com.101tec</groupId>
+                  <artifactId>zkclient</artifactId>
+                  <version>${zkclient_version}</version>
+              </dependency>-->
+            <!-- Zookeeper 用于分布式服务管理 end -->
+
+            <!-- Spring Dependency Begin -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-instrument</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-instrument-tomcat</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-struts</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.bom.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc-portlet</artifactId>
+                <version>${spring.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <!-- Spring Dependency End -->
+
+            <!-- MyBatis Dependency Begin -->
+            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis_spring_version}</version>
+            </dependency>
+            <!-- MyBatis Dependency End -->
+
+            <!-- Mysql Driver Begin -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql_version}</version>
+            </dependency>
+            <!-- Mysql Driver End -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${oracle_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>${commons_dbcp_version}</version>
+            </dependency>
+
+            <!-- Others Begin -->
+            <dependency>
+                <groupId>google.code</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>6.0.37</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>6.0.37</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.19</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.netty</groupId>
+                <artifactId>netty</artifactId>
+                <version>3.2.5.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>${activemq_version}</version>
+            </dependency>
+            <!-- Others End -->
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.7.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${asm_version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm-tree -->
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm-tree</artifactId>
+                <version>${asm_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm-util</artifactId>
+                <version>${asm_version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven_assembly_version}</version>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/main/assembly/assembly.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven_assembly_version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven_deploy_version}</version>
+                <configuration>
+                    <uniqueVersion>false</uniqueVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>${maven_eclipse_version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven_compiler_version}</version>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <compilerArgument>-nowarn</compilerArgument>
+                    <source>${jdk_source_version}</source>
+                    <target>${jdk_target_version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven_source_version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FlightMapper">
+
+    <resultMap type="com.simple.core.common.entity.Flight" id="FlightMap">
+        <result column="flight_id" property="flightId"/>
+        <result column="foc_flight_id" property="focFlightId"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="departure_airport" property="departureAirport"/>
+        <result column="arrival_airport" property="arrivalAirport"/>
+        <result column="std" property="std"/>
+        <result column="etd" property="etd"/>
+        <result column="atd" property="atd"/>
+        <result column="sta" property="sta"/>
+        <result column="eta" property="eta"/>
+        <result column="ata" property="ata"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="ac_reg" property="acReg"/>
+        <result column="ac_type" property="acType"/>
+        <result column="d_or_i" property="dOrI"/>
+        <result column="dispatch_pass_time" property="dispatchPassTime"/>
+        <result column="is_dispatch" property="dispatch"/>
+        <result column="crew_arrival_time" property="crewArrivalTime"/>
+        <result column="is_crew_arrival" property="crewArrival"/>
+        <result column="flg_vr" property="flgVR"/>
+        <result column="flg_vr1" property="flgVR1"/>
+        <result column="flg_cs" property="flgCS"/>
+        <result column="route_change" property="routeChange"/>
+        <result column="main_route" property="mainRoute"/>
+        <result column="main_route_point" property="mainRoutePoint"/>
+        <result column="alter_route1" property="alterRoute1"/>
+        <result column="alter_route2" property="alterRoute2"/>
+        <result column="alter_route3" property="alterRoute3"/>
+        <result column="alter_route1_point" property="alterRoute1Point"/>
+        <result column="alter_route2_point" property="alterRoute2Point"/>
+        <result column="alter_route3_point" property="alterRoute3Point"/>
+        <result column="main_company_route" property="mainCompanyRoute"/>
+        <result column="alter_company_route1" property="alterCompanyRoute1"/>
+        <result column="alter_company_route2" property="alterCompanyRoute2"/>
+        <result column="alter_company_route3" property="alterCompanyRoute3"/>
+        <result column="alter_airport1" property="alterAirport1"/>
+        <result column="alter_airport2" property="alterAirport2"/>
+        <result column="alter_airport3" property="alterAirport3"/>
+        <result column="foc_modify_tm" property="focModifyTm"/>
+        <result column="is_main_special" property="mainSpecial"/>
+        <result column="is_alter1_special" property="alter1Special"/>
+        <result column="is_alter2_special" property="alter2Special"/>
+        <result column="is_alter3_special" property="alter3Special"/>
+
+        <result column="cost_index" property="costIndex"/>
+        <result column="tra_fuel" property="traFuel"/>
+        <result column="takeoff_weight" property="takeoffWeight"/>
+        <result column="land_weight" property="landWeight"/>
+        <result column="av_payload" property="avPayload"/>
+        <result column="opnl_weight" property="opnlWeight"/>
+        <result column="alt_fuel" property="altFuel"/>
+        <result column="hld_fuel" property="hldFuel"/>
+        <result column="res_fuel" property="resFuel"/>
+        <result column="xtr_fuel" property="xtrFuel"/>
+        <result column="apu_fuel" property="apuFuel"/>
+        <result column="txo_fuel" property="txoFuel"/>
+        <result column="txi_fuel" property="txiFuel"/>
+        <result column="fob_fuel" property="fobFuel"/>
+        <result column="cruise_altitude" property="cruiseAltitude"/>
+        <result column="route_avg_temp" property="routeAvgTemp"/>
+        <result column="route_avg_wind" property="routeAvgWind"/>
+
+        <result column="fpn_state" property="fpnState"/>
+        <result column="fpn_tm" property="fpnTm"/>
+        <result column="ldi_state" property="ldiState"/>
+        <result column="ldi_tm" property="ldiTm"/>
+        <result column="pwi_state" property="pwiState"/>
+        <result column="pwi_tm" property="pwiTm"/>
+        <result column="per_state" property="perState"/>
+        <result column="per_tm" property="perTm"/>
+
+        <result column="plan_no" property="planNo"/>
+        <result column="plan_no_change" property="planNoChange"/>
+        <result column="alter_route1_fl" property="alterRoute1Fl"/>
+        <result column="alter_route2_fl" property="alterRoute2Fl"/>
+        <result column="alter_route3_fl" property="alterRoute3Fl"/>
+        <result column="alter_route1_wc" property="alterRoute1Wc"/>
+        <result column="alter_route2_wc" property="alterRoute2Wc"/>
+        <result column="alter_route3_wc" property="alterRoute3Wc"/>
+
+    </resultMap>
+
+    <sql id="flightColumns">
+        flight_id,
+                foc_flight_id,
+                flight_date,
+                flight_no,
+                departure_airport,
+                arrival_airport,
+                std,
+                etd,
+                atd,
+                sta,
+                eta,
+                ata,
+                create_tm,
+                modify_tm,
+                ac_reg,
+                ac_type,
+                d_or_i,
+                dispatch_pass_time,
+                crew_arrival_time,
+                flg_vr,
+                flg_vr1,
+                flg_cs,
+                route_change,
+                main_route,
+                main_route_point,
+                alter_route1,
+                alter_route2,
+                alter_route3,
+                alter_route1_point,
+                alter_route2_point,
+                alter_route3_point,
+                main_company_route,
+                alter_company_route1,
+                alter_company_route2,
+                alter_company_route3,
+                alter_airport1,
+                alter_airport2,
+                alter_airport3,
+                foc_modify_tm,
+                is_main_special,
+                is_dispatch,
+                is_crew_arrival,
+                fpn_state,
+                fpn_tm,
+                ldi_state,
+                ldi_tm,
+                pwi_state,
+                pwi_tm,
+                per_state,
+                per_tm,
+                cost_index,
+                tra_fuel,
+                takeoff_weight,
+                land_weight,
+                av_payload,
+                opnl_weight,
+                alt_fuel,
+                hld_fuel,
+                res_fuel,
+                xtr_fuel,
+                apu_fuel,
+                txo_fuel,
+                txi_fuel,
+                fob_fuel,
+                cruise_altitude,
+                route_avg_temp,
+                route_avg_wind,
+                is_alter1_special,
+                is_alter2_special,
+                is_alter3_special,
+                plan_no,
+                plan_no_change,
+                alter_route1_fl,
+                alter_route2_fl,
+                alter_route3_fl,
+                alter_route1_wc,
+                alter_route2_wc,
+                alter_route3_wc,
+                alter_route1_fuel,
+                alter_route2_fuel,
+                alter_route3_fuel
+    </sql>
+
+    <select id="selectFlightBases"  parameterType="Map" resultMap="FlightMap">
+       SELECT
+        <include refid="flightColumns"/>
+	   FROM fms_flight
+	   WHERE flight_date = #{flightDt}
+	     AND ac_reg =#{acReg}
+    </select>
+
+    <select id="selectFlightBases2"  parameterType="Map" resultMap="FlightMap">
+        SELECT
+        <include refid="flightColumns"/>
+        FROM fms_flight
+        WHERE flight_date = #{flightDate}
+          AND flight_no =#{flightNo}
+          AND departure_airport =#{departureAirport}
+          AND arrival_airport =#{arrivalAirport}
+          AND std =#{std}
+    </select>
+
+    <select id="selectMsgValidTm" resultType="com.simple.core.route.flight.entity.MsgValidTm">
+        SELECT
+          carrier_iata    carrierIata,
+          msg_type        msgType,
+          is_dept      deptState,
+          is_fly      flyState,
+          is_arrive    arriveState,
+          dept_begin      deptBegin,
+          arrive_end      arriveEnd,
+          is_active       active
+        FROM fms_cfg_msgtm
+   </select>
+
+
+</mapper>

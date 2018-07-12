@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MsgPersistMapper">
+
+    <resultMap type="com.simple.core.route.persist.entity.PersistMsgInfo" id="PersistMsgInfoMap">
+        <result column="msg_id" property="msgId"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="ac_reg" property="acReg"/>
+
+        <result column="flight_id" property="flightId"/>
+        <result column="flight_dt" property="flightDt"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="dept_airport" property="deptAirport"/>
+        <result column="arrive_airport" property="arriveAirport"/>
+        <result column="std" property="std"/>
+
+        <result column="down_msg_type" property="downMsgType"/>
+        <result column="down_msg_content" property="downMsgContent"/>
+        <result column="down_msg_channel" property="downMsgChannel"/>
+        <result column="down_receive_tm" property="downReceiveTm"/>
+
+        <result column="up_msg_type" property="upMsgType"/>
+        <result column="up_msg_content" property="upMsgContent"/>
+        <result column="up_msg_channel" property="upMsgChannel"/>
+        <result column="up_send_tm" property="upSendTm"/>
+
+        <result column="last_state" property="msgStep"/>
+    </resultMap>
+
+    <resultMap type="com.simple.core.route.persist.entity.PersistMsgTrail" id="PersistMsgTrailMap">
+        <result column="trail_id" property="msgId"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="create_tm" property="createTm"/>
+        <result column="modify_tm" property="modifyTm"/>
+        <result column="msg_state" property="msgState"/>
+        <result column="msg_reason" property="msgReason"/>
+        <result column="msg_channel" property="msgChannel"/>
+        <result column="reply_content" property="replyContent"/>
+    </resultMap>
+
+    <insert id="insertPersistMsgInfo" parameterType="com.simple.core.route.persist.entity.PersistMsgInfo">
+        INSERT INTO fms_msg_info
+            (msg_id, create_tm, ac_reg, flight_id, flight_dt,
+             flight_no, dept_airport, arrive_airport, std, down_msg_type,
+             down_msg_content, down_msg_channel, down_receive_tm, up_msg_type, up_msg_content,
+             up_msg_channel, up_send_tm, last_state, modify_tm
+            )
+        VALUES
+            (#{msgId}, #{createTm}, #{acReg}, #{flightId}, #{flightDt},
+             #{flightNo}, #{deptAirport}, #{arriveAirport}, #{std}, #{downMsgType},
+             #{downMsgContent}, #{downMsgChannel}, #{downReceiveTm}, #{upMsgType}, #{upMsgContent},
+             #{upMsgChannel}, #{upSendTm}, #{msgStep},#{modifyTm}
+            )
+    </insert>
+
+    <insert id="insertPersistMsgTrail" parameterType="com.simple.core.route.persist.entity.PersistMsgTrail">
+      INSERT INTO fms_msg_trail
+        (trail_id,  msg_id,  create_tm,  modify_tm, msg_type, msg_state, msg_reason,  msg_channel, reply_content,msg_group)
+      VALUES
+        (#{trailId}, #{msgId}, #{createTm}, #{modifyTm},#{msgType}, #{msgState}, #{msgReason}, #{msgChannel}, #{replyContent}, #{msgGroup})
+    </insert>
+
+    <update id="updatePersistMsgInfoState" parameterType="com.simple.core.route.persist.entity.PersistMsgInfo">
+         UPDATE fms_msg_info
+            SET last_state = #{msgStep},
+                modify_tm = #{modifyTm}
+         WHERE  msg_id = #{msgId}
+     </update>
+
+    <select id="selectPersistMsgInfo" parameterType="java.lang.String" resultMap="PersistMsgInfoMap">
+         SELECT msg_id, create_tm, ac_reg, flight_id, flight_dt,
+                flight_no, dept_airport, arrive_airport, std, down_msg_type,
+                down_msg_content, down_msg_channel, down_receive_tm, up_msg_type, up_msg_content,
+                up_msg_channel, up_send_tm, last_state, modify_tm
+           FROM fms_msg_info
+          WHERE msg_id = #{msgId}
+     </select>
+
+    <update id="updateFlightMsgState" parameterType="com.simple.core.route.persist.entity.PersistMsgInfo">
+        UPDATE fms_flight
+        SET
+        <if test='msgType != null and (msgType == "FPN" or msgType == "REQFPN" or msgType == "REJFPN" or msgType == "RESFPN")'>
+            fpn_state = #{msgStep},
+            fpn_tm =#{msgTm},
+        </if>
+        <if test='msgType != null and (msgType == "LDI" or msgType == "REQLDI" or msgType == "REJLDI" or msgType == "RESLDI")'>
+            ldi_state = #{msgStep},
+            ldi_tm =#{msgTm},
+        </if>
+        <if test='msgType != null and (msgType == "PWI" or msgType == "REQPWI" or msgType == "REJPWI" or msgType == "RESPWI")'>
+            pwi_state = #{msgStep},
+            pwi_tm =#{msgTm},
+        </if>
+        <if test='msgType != null and (msgType == "PER" or msgType =="REQPER" or msgType == "REJPER" or msgType == "RESPER")'>
+            per_state = #{msgStep},
+            per_tm =#{msgTm},
+        </if>
+        flight_id = #{flightId}
+        WHERE flight_id = #{flightId}
+    </update>
+
+</mapper>
